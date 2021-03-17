@@ -16,29 +16,41 @@ const accessToken = oauth2Client.getAccessToken()
 
 
 
-module.exports.send = async (feedback) => {
+module.exports.send = async (feedback, email) => {
 
 
 
     
-    const smtpTransport = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            type: "OAuth2",
-            user: 'benedictionz.media@gmail.com',
-            clientId: process.env.OAUTH_CLIENT_ID,
-            clientSecret: process.env.OAUTH_CLIENT_SECRET,
-            refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-            accessToken: accessToken
-        }
+    const smtpTransport = nodemailer.createTransport({ 
+        host: 'smtp.office365.com',
+        port: '587',
+        auth: { user: `${process.env.EMAIL}`, pass: process.env.PASSWORD},
+        secureConnection: false,
+        tls: { ciphers: 'SSLv3' }
     });
+    
+    
+    
+    
+    
+    // const smtpTransport = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //         type: "OAuth2",
+    //         user: 'benedictionz.media@gmail.com',
+    //         clientId: process.env.OAUTH_CLIENT_ID,
+    //         clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    //         refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+    //         accessToken: accessToken
+    //     }
+    // });
 
 
 
     // setup e-mail data, even with unicode symbols
     var mailOptions = {
-        from: 'Oilserv Group', // sender address (who sends)
-        to: 'victor.paul@oilservltd-ng.com', // list of receivers (who receives)
+        from: process.env.EMAIL, // sender address (who sends)
+        to: email, // list of receivers (who receives)
         subject: 'Hello ', // Subject line
         html: `<!DOCTYPE html>\n` +
         `<html>\n` +

