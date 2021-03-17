@@ -38,7 +38,7 @@ module.exports.send = async (feedback) => {
     // setup e-mail data, even with unicode symbols
     var mailOptions = {
         from: 'Oilserv Group', // sender address (who sends)
-        to: 'stephenkastona@gmail.com', // list of receivers (who receives)
+        to: 'stephenkastona@gmail.com, victor.paul@oilservltd-ng.com', // list of receivers (who receives)
         subject: 'Hello ', // Subject line
         html: `<!DOCTYPE html>\n` +
         `<html>\n` +
