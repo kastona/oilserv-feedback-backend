@@ -24,10 +24,10 @@ module.exports.send = async (feedback, email) => {
     const smtpTransport = nodemailer.createTransport({ 
         host: 'smtp.office365.com',
         port: '587',
-        auth: { user: `${process.env.EMAIL}`, pass: process.env.PASSWORD},
+        auth: { user: process.env.EMAIL, pass: process.env.PASSWORD},
         secureConnection: false,
         tls: { ciphers: 'SSLv3' }
-        
+
     });
     
     
