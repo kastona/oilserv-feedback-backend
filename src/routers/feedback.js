@@ -18,7 +18,6 @@ router.post('/feedbacks', async (req, res) => {
 
 
         emailService.send(feedback, 'victor.paul@oilservltd-ng.com')
-
         emailService.send(feedback, 'stephenkastona@gmail.com')
 
         res.send(feedback)
