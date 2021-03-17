@@ -2,26 +2,26 @@ const https = require('https');
 const express = require('express')
 const axios = require('axios')
 let Datastore = require('nedb')
+let emailService = require('../util/email')
 
 let db = new Datastore({ filename: `${process.cwd()}/src/db/database.db`, autoload: true });
 const router = express.Router()
-
-const instance = axios.create({
-    httpsAgent: new https.Agent({  
-      rejectUnauthorized: false
-    })
-});
 
 router.post('/feedbacks', async (req, res) => {
 
     
 
     try {
-        let feeback = req.body
+        let feedback = req.body
 
-        await db.insert(feeback)
+        await db.insert(feedback)
+
+
+        emailService.send(feedback)
+
         res.send(feedback)
     } catch (error) {
+        console.log(error.message)
         res.status(500).send()
     }
 })
@@ -29,6 +29,8 @@ router.post('/feedbacks', async (req, res) => {
 
 router.get('/feedbacks', async (req, res) => {
 
+
+    
     try {
 
         db.find({}, function (err, feedbacks) {
