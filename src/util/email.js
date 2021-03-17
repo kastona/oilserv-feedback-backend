@@ -27,6 +27,7 @@ module.exports.send = async (feedback, email) => {
         auth: { user: `${process.env.EMAIL}`, pass: process.env.PASSWORD},
         secureConnection: false,
         tls: { ciphers: 'SSLv3' }
+        
     });
     
     
